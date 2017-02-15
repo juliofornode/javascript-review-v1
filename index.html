@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="libs/es6-shim.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="libs/lodash.min.js"></script>
+  <script src="app.js"></script>
+</head>
+<body>
+
+
+  <p id="one">This is p one.</p>
+  <br>
+  <p id="two">And this is p two.</p>
+
+  <script>
+
+    document.getElementById('one').addEventListener('click', myOne);
+
+    function myOne() {
+      document.getElementById('one').innerHTML = 'hey!';
+    }
+
+    $('p#two').click(myTwo);
+
+/*    $("p").click(function(){
+      $(this).hide();
+    });*/
+
+
+    function myTwo() {
+      $(this).hide();
+    }
+
+
+
+
+  </script>
+
+
+
+
+
+</body>
+</html>

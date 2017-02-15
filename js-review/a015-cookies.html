@@ -1,0 +1,103 @@
+<!--
+
+COOKIES
+-------
+Cookies are small text files stored in your computer to remember you as user of a web page.
+Cookies are saved in name-value pairs like username = John Doe.
+
+When a browser requests a web page from a server, cookies belonging to the page are added to the request.
+This way the server gets the necessary data to "remember" information about users.
+
+
+CREATE A COOKIE
+---------------
+JavaScript can create, read, and delete cookies with the document.cookie property.
+
+    document.cookie = "username=John Doe";
+
+If you set a new cookie, older cookies are not overwritten. The new cookie is added to document.cookie
+
+You can also add an expiry date (in UTC time). By default, the cookie is deleted when the browser is closed:
+
+    document.cookie = "username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC";
+
+
+With a path parameter, you can tell the browser what path the cookie belongs to.
+By default, the cookie belongs to the current page.
+
+    document.cookie = "username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/";
+
+
+READ OR CHANGE A COOKIE
+-----------------------
+    var x = document.cookie;
+
+
+If you want to find the value of one specified cookie, you must write a JavaScript
+function that searches for the cookie value in the cookie string.
+
+
+DELETE A COOKIE
+---------------
+Set the expires parameter to a passed date.
+
+
+
+-->
+
+
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <script>
+
+        function setCookie(cname,cvalue,exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays*24*60*60*1000));
+            var expires = "expires=" + d.toGMTString();
+            document.cookie = cname+"="+cvalue+"; "+expires;
+        }
+
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0; i<ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function checkCookie() {
+
+            var user = getCookie("username");
+
+            if (user != "") {
+                alert("Welcome again " + user);
+            } else {
+                user = prompt("Please enter your name:","");
+                if (user != "" && user != null) {
+                    setCookie("username", user, 30);
+                }
+            }
+
+        }
+
+        </script>
+
+    </head>
+
+    <body onload="checkCookie()">
+    </body>
+
+</html>
+
+
